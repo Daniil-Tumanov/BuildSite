@@ -55,7 +55,7 @@
 
                     {% else %}
           <form class="form-inline my-2 my-lg-0">
-            <a href="login" class="btn btn-primary"  role="button">Вход</a>
+            <a href="{% url 'login' %}" class="btn btn-primary"  role="button">Вход</a>
             <button type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#Register">Регистрация</button>
           </form>
 <!--            <div class="modal fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="LoginLabel" aria-hidden="true">-->
@@ -329,7 +329,7 @@
      </div>
  {% endblock %}
 <!-- Footer -->
-<footer class="page-footer font-small mdb-color pt-4 bg-dark">
+<footer class="page-footer font-small mdb-color pt-4 bg-dark mt-5">
 
   <!-- Footer Links -->
   <div class="container text-center text-md-left">
