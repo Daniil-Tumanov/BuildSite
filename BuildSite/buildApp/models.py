@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -32,7 +33,7 @@ class Orders(models.Model):
     Datetime = models.DateTimeField(verbose_name="Время оформления заявки")
     Status = models.ForeignKey(Status, verbose_name="Статус", on_delete=models.CASCADE)
     DatetimeEnd = models.DateTimeField(verbose_name="Время окончания", null=True)
+    User = models.ForeignKey(User, verbose_name="Пользователь", on_delete=models.CASCADE)
 
     def __str__(self):
         return self.Datetime
-

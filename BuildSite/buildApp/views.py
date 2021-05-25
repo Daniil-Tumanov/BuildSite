@@ -6,6 +6,8 @@ from django.urls import reverse_lazy
 
 from buildApp.forms import AuthUserForm
 
+from buildApp.models import Service, Category
+
 
 def index(request):
     return render(request, 'buildApp/index.html')
@@ -13,6 +15,16 @@ def index(request):
 
 def about(request):
     return render(request, 'buildApp/about.html')
+
+
+def service(request):
+    service = Service.objects.all()
+    category = Category.objects.all()
+    return render(request, 'buildApp/service.html', {"service": service, "category": category})
+
+
+def contacts(request):
+    return render(request, 'buildApp/contacts.html')
 
 
 class Logout(LogoutView):
@@ -26,7 +38,6 @@ class BuildLoginView(LoginView):
 
 
 def registerPage(request):
-
     if request.method == 'POST':
         user = User()
         user.first_name = request.POST.get("FirstName")

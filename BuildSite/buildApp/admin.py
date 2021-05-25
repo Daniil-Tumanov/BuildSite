@@ -7,3 +7,4 @@ admin.site.register(Service)
 admin.site.register(Status)
 admin.site.register(Orders)
 # Register your models here.
+

@@ -18,24 +18,58 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
+<!--              {% if 'index' in request.path %}-->
+<!--            <li class="nav-item active">-->
+<!--              <a class="nav-link" href="{% url 'index' %}">Главная <span class="sr-only">(current)</span></a>-->
+<!--            </li>-->
+<!--            {% else %}-->
+<!--            <li class="nav-item">-->
+<!--              <a class="nav-link" href="{% url 'index' %}">Главная <span class="sr-only">(current)</span></a>-->
+<!--            </li>-->
+<!--            {% endif %}-->
+            {% if 'service' in request.path %}
             <li class="nav-item active">
-              <a class="nav-link" href="{% url 'index' %}">Главная <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="{% url 'service' %}">Услуги</a>
             </li>
+            {% else %}
             <li class="nav-item">
-              <a class="nav-link" href="">Услуги</a>
+              <a class="nav-link" href="{% url 'service' %}">Услуги</a>
             </li>
-              <li class="nav-item">
+            {% endif %}
+            {% if 'about' in request.path %}
+              <li class="nav-item active">
               <a class="nav-link" href="{% url 'about' %}">О компании</a>
             </li>
-              <li class="nav-item">
-              <a class="nav-link" href="">Контакты</a>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'about' %}">О компании</a>
             </li>
-              <li class="nav-item">
-              <a class="nav-link" href="">Руководящий состав</a>
+            {% endif %}
+            {% if 'contacts' in request.path %}
+              <li class="nav-item active">
+              <a class="nav-link" href="{% url 'contacts' %}">Контакты</a>
             </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'contacts' %}">Контакты</a>
+            </li>
+            {% endif %}
+            {% if request.user.is_superuser %}
+            <li class="nav-item">
+              <a class="nav-link" href="admin">Админ-панель</a>
+            </li>
+            {% endif %}
+            {% if request.user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'contacts' %}">Заказы</a>
+            </li>
+            {% endif %}
+<!--              <li class="nav-item">-->
+<!--              <a class="nav-link" href="">Руководящий состав</a>-->
+<!--            </li>-->
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Меню
+                Категории услуг
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="#">Заказы</a>
