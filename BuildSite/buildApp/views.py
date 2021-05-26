@@ -1,6 +1,6 @@
 from django.contrib.auth import login
 from django.contrib.auth.models import User
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
 
@@ -15,6 +15,11 @@ def index(request):
 
 def about(request):
     return render(request, 'buildApp/about.html')
+
+
+def buildHome(request):
+    categories = Category.objects.filter(id=2)
+    return render(request, 'buildApp/buildHome.html', {"categories": categories})
 
 
 def service(request):
