@@ -1,5 +1,6 @@
 from django.contrib.auth import login
 from django.contrib.auth.models import User
+from django.http import HttpResponseNotFound, Http404
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
@@ -17,9 +18,26 @@ def about(request):
     return render(request, 'buildApp/about.html')
 
 
-def buildHome(request):
-    categories = Category.objects.filter(id=2)
-    return render(request, 'buildApp/buildHome.html', {"categories": categories})
+def pageNotFound(request, exception):
+    return HttpResponseNotFound('<h1>not found</h1>')
+
+
+def showService(request, service_slug):
+    service = get_object_or_404(Service, Slug=service_slug)
+    context = {
+        'service': service,
+        'title': service.NameService,
+    }
+    return render(request, 'buildApp/show.html', context=context)
+
+
+def showCategory(request, category_id):
+    category = Category.objects.filter(id=category_id)
+    context = {
+        'category': category
+    }
+
+    return render(request, 'buildApp/category.html', context=context)
 
 
 def service(request):

@@ -1,0 +1,30 @@
+{% extends "buildApp/service.html" %}
+{% block content %}
+<blockquote class="blockquote text-center">
+<div class="btn-group mt-2 " role="group" aria-label="Basic example">
+    {% for c in category %}
+  <a type="button" class="btn btn-secondary" href="{% url 'service' %}">Все категории</a>
+        {% endfor %}
+</div>
+</blockquote>
+<div class="container">
+              {% for c in category %}
+<h1 class="text-center">{{ c.CategoryName }}</h1>
+          <div class="row">
+              {% for b in c.category.all %}
+        <div class="col-sm-4">
+           <div class="card text-white bg-dark mb-3">
+              <img class="card-img-top" src="{{ b.IMG.url }}" alt="Card image cap" height="250">
+              <div class="card-body">
+                  <h5 class="card-title">{{ b.NameService }}</h5>
+                <p class="card-text">{{ b.Description }}</p>
+<!--                  <p class="card-text"><small class="text-muted">{{ s.Datetime }}</small></p>-->
+                <a href="#" class="btn btn-primary">Подробнее</a>
+            </div>
+</div>
+        </div>
+          {% endfor %}
+    {% endfor %}
+</div>
+              </div>
+{% endblock %}

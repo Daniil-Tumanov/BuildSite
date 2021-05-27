@@ -1,33 +1,27 @@
 {% extends "buildApp/index.html" %}
 {% block content %}
 <blockquote class="blockquote text-center">
+
 <div class="btn-group mt-2 " role="group" aria-label="Basic example">
-  <a type="button" class="btn btn-secondary" href="#">Постройка домов</a>
-  <button type="button" class="btn btn-secondary">Middle</button>
-  <button type="button" class="btn btn-secondary">Right</button>
-    <button type="button" class="btn btn-secondary">Left</button>
-  <button type="button" class="btn btn-secondary">Middle</button>
-  <button type="button" class="btn btn-secondary">Right</button>
-    <button type="button" class="btn btn-secondary">Left</button>
-  <button type="button" class="btn btn-secondary">Middle</button>
-  <button type="button" class="btn btn-secondary">Right</button>
-    <button type="button" class="btn btn-secondary">Left</button>
-  <button type="button" class="btn btn-secondary">Middle</button>
-  <button type="button" class="btn btn-secondary">Right</button>
+    {% for c in category %}
+  <a type="button" class="btn btn-secondary" href="{{ c.get_absolute_url }}">{{ c.CategoryName }}</a>
+        {% endfor %}
 </div>
+
 </blockquote>
+
 <div class="container">
 <h1 class="text-center">Все услуги</h1>
           <div class="row">
           {% for s in service %}
         <div class="col-sm-4">
            <div class="card text-white bg-dark mb-3">
-              <img class="card-img-top" src="#" alt="Card image cap" height="250">
+              <img class="card-img-top" src="{{ s.IMG.url }}" alt="Card image cap" height="250">
               <div class="card-body">
                   <h5 class="card-title">{{ s.NameService }}</h5>
                 <p class="card-text">{{ s.Description }}</p>
 <!--                  <p class="card-text"><small class="text-muted">{{ s.Datetime }}</small></p>-->
-                <a href="#" class="btn btn-primary">Подробнее</a>
+                <a href="{{ s.get_absolute_url }}" class="btn btn-primary">Подробнее</a>
             </div>
 </div>
         </div>
