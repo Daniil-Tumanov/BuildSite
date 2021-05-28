@@ -1,5 +1,17 @@
 {% extends "buildApp/index.html" %}
 {% block content %}
-<h1>{{service.NameService}}</h1>
-{{service.Description}}
+<div class="container">
+      <h1 class="text-center display-4">{{service.NameService}}</h1>
+    <div class="media mt-3">
+
+    <img src="{{ service.IMG.url }}" class="align-self-start mr-3">
+    <div class="media-body">
+
+    <p class="lead">Описание: {{service.Description}}</p>
+        <p class="lead">Характеристики: {{ service.Specification }}</p>
+        <a href="{{ service.get_absolute_url }}" class="btn btn-primary">Выбрать услугу</a>
+    </div>
+    </div>
+
+</div>
 {% endblock %}

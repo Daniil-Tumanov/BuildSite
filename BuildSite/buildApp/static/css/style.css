@@ -20,3 +20,6 @@ footer {
 .right{
     text-align: right;
 }
+.media img{
+    width: 60%;
+}
