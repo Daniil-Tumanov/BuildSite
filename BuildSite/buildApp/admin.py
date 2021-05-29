@@ -17,8 +17,14 @@ class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {"Slug": ("CategoryName",)}
 
 
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('id', 'User', 'Service', 'Datetime', 'Status', 'Phone', 'Comment')
+    list_display_links = ('id', 'User', 'Service', 'Datetime', 'Status', 'Phone', 'Comment')
+    search_fields = ('User',)
+
+
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Service, ServiceAdmin)
 admin.site.register(Status)
-admin.site.register(Orders)
+admin.site.register(Orders, OrderAdmin)
 # Register your models here.

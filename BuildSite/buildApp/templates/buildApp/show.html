@@ -1,4 +1,5 @@
 {% extends "buildApp/index.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
 <div class="container">
       <h1 class="text-center display-4">{{service.NameService}}</h1>
@@ -9,7 +10,11 @@
 
     <p class="lead">Описание: {{service.Description}}</p>
         <p class="lead">Характеристики: {{ service.Specification }}</p>
-        <a href="{{ service.get_absolute_url }}" class="btn btn-primary">Выбрать услугу</a>
+        <form action="{% url 'makeOrder' %}" method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type="submit" class="btn btn-success btn-block mb-3" values="Выбрать услугу">
+        </form>
     </div>
     </div>
 
