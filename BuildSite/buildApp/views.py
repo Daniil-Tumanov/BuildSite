@@ -1,5 +1,6 @@
 from django.contrib.auth import login
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseNotFound, Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.views import LoginView, LogoutView
@@ -12,6 +13,7 @@ from buildApp.models import Service, Category
 from buildApp.forms import OrderForm
 
 from buildApp.models import Orders
+from django.views.generic.edit import FormMixin
 
 
 def index(request):
@@ -84,15 +86,17 @@ def registerPage(request):
         return render(request, 'buildApp/index.html', context)
 
 
-def makeOrder(request):
-    form = OrderForm(request.POST or None)
-    service_instance = request.Service
-    if form.is_valid():
-        order = Orders()
-        order.Comment = form.cleaned_data['Comment']
-        order.Phone = form.cleaned_data['Phone']
-        order.User = User(request.user.id)
-        # order.Service = Service('id')
-        order.save()
-        return HttpResponseRedirect('/')
-    return HttpResponseRedirect('/service/')
+def makeOrder(request, id):
+
+    if request.method == 'POST':
+        form = OrderForm(request.POST or None)
+        service = get_object_or_404(Service, id=id)
+        if form.is_valid():
+            order = Orders()
+            order.Comment = form.cleaned_data['Comment']
+            order.Phone = form.cleaned_data['Phone']
+            order.User = User(request.user.id)
+            order.Service = service
+            order.save()
+            return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/service/')

@@ -14,4 +14,4 @@ class AuthUserForm(AuthenticationForm, forms.ModelForm):
 class OrderForm(forms.ModelForm):
     class Meta:
         model = Orders
-        fields = ('Comment', 'Phone')
+        fields = ('id', 'Comment', 'Phone')

@@ -32,7 +32,7 @@ class Service(models.Model):
     Description = models.TextField(verbose_name="Описание", blank=True)
     Specification = models.TextField(verbose_name="Характеристики", blank=True)
     Category = models.ForeignKey(Category, verbose_name="Категория", on_delete=models.CASCADE, related_name="category")
-    IMG = models.ImageField(upload_to='img/', verbose_name="Изображение")
+    IMG = models.ImageField(upload_to='img/%Y/%m/%d/', verbose_name="Изображение")
 
     def __str__(self):
         return self.NameService

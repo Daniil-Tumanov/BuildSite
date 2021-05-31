@@ -10,7 +10,7 @@
 
     <p class="lead">Описание: {{service.Description}}</p>
         <p class="lead">Характеристики: {{ service.Specification }}</p>
-        <form action="{% url 'makeOrder' %}" method="POST">
+        <form action="{% url 'makeOrder' service.id %}" method="POST">
             {% csrf_token %}
             {{ form|crispy }}
             <input type="submit" class="btn btn-success btn-block mb-3" values="Выбрать услугу">
