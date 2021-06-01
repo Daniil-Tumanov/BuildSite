@@ -18,7 +18,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('id', 'User', 'Service', 'Datetime', 'Status', 'Phone', 'Comment')
+    list_display = ('id', 'User', 'Service', 'Datetime', 'DateEnd', 'Status', 'Phone', 'Comment')
     list_display_links = ('id', 'User', 'Service', 'Datetime', 'Status', 'Phone', 'Comment')
     search_fields = ('User',)
 

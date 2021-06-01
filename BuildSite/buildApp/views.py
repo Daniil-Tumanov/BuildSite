@@ -13,7 +13,6 @@ from buildApp.models import Service, Category
 from buildApp.forms import OrderForm
 
 from buildApp.models import Orders
-from django.views.generic.edit import FormMixin
 
 
 def index(request):
@@ -25,7 +24,7 @@ def about(request):
 
 
 def pageNotFound(request, exception):
-    return HttpResponseNotFound('<h1>not found</h1>')
+    return render(request, 'buildApp/404.html')
 
 
 def showService(request, service_slug):
@@ -58,6 +57,11 @@ def contacts(request):
     return render(request, 'buildApp/contacts.html')
 
 
+def personal(request):
+    orders = Orders.objects.filter(User=request.user)
+    return render(request, 'buildApp/personal.html', {"orders": orders})
+
+
 class Logout(LogoutView):
     next_page = reverse_lazy('index')
 
@@ -87,7 +91,6 @@ def registerPage(request):
 
 
 def makeOrder(request, id):
-
     if request.method == 'POST':
         form = OrderForm(request.POST or None)
         service = get_object_or_404(Service, id=id)

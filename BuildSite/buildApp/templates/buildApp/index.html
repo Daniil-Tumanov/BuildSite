@@ -56,12 +56,12 @@
             {% endif %}
             {% if request.user.is_superuser %}
             <li class="nav-item">
-              <a class="nav-link" href="admin">Админ-панель</a>
+              <a class="nav-link" href="/admin/">Админ-панель</a>
             </li>
             {% endif %}
             {% if request.user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'contacts' %}">Заказы</a>
+              <a class="nav-link" href="{% url 'personal' %}">Заказы</a>
             </li>
             {% endif %}
 <!--              <li class="nav-item">-->
@@ -72,16 +72,14 @@
                 Категории услуг
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Заказы</a>
-                <a class="dropdown-item" href="#">Категории</a>
+                <a class="dropdown-item" href="">Обратная связь</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Личный кабинет</a>
-                <a class="dropdown-item" href="http://127.0.0.1:8000/admin">Админ панель</a>
               </div>
             </li>
           </ul>
           {% if user.is_authenticated %}
-          <a href="#" class="badge badge-success">Вы вошли как: {{request.user}}</a>
+          <a href="{% url 'personal' %}" class="badge badge-success">Вы вошли как: {{request.user}}</a>
           <form method="post">
                           {% csrf_token %}
             <a href="{% url 'logout' %}" name="logout" class="btn btn-danger ml-2" role="button">Выйти</a>
@@ -414,7 +412,7 @@
           <a href="#!">Админ-панель</a>
         </p>
         <p>
-          <a href="#!">Личный кабинет</a>
+          <a href="{% url 'personal' %}">Личный кабинет</a>
         </p>
       </div>
 
@@ -447,7 +445,7 @@
       <div class="col-md-7 col-lg-8">
 
         <!--Copyright-->
-        <p class="text-center text-md-left">© 2021 Туманов Д.В. All Rights Reserved
+        <p class="text-center text-md-left">© 2021 Промтехсервис. All Rights Reserved
           </a>
         </p>
 

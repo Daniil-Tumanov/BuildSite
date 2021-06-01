@@ -1,4 +1,38 @@
 {% extends "buildApp/index.html" %}
 {% block content %}
-
+<div class="container">
+    {% if user.is_authenticated %}
+    <table class="table table-striped mt-5">
+  <thead class="table-primary">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Наименование услуги</th>
+      <th scope="col">Дата оформления заявки</th>
+      <th scope="col">Дата завершения работы</th>
+      <th scope="col">Статус заявки</th>
+      <th scope="col">Ваш комментарий</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for o in orders %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>{{ o.Service }}</td>
+      <td>{{ o.Datetime }}</td>
+      <td>{% if o.DateEnd == None %}
+        Не задано
+        {% else %}
+        {{ o.DateEnd }}
+        {% endif %}
+      </td>
+      <td>{{ o.Status }}</td>
+      <td width="180" class="block width100">{{ o.Comment|truncatechars:250 }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+    {% else %}
+    <h1> Не авторизованы</h1>
+    {% endif %}
+</div>
 {% endblock %}

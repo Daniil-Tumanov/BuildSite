@@ -17,9 +17,9 @@
               <img class="card-img-top" src="{{ b.IMG.url }}" alt="Card image cap" height="250">
               <div class="card-body">
                   <h5 class="card-title">{{ b.NameService }}</h5>
-                <p class="card-text">{{ b.Description }}</p>
+                <p class="card-text">{{ b.Description|truncatechars:129 }}</p>
 <!--                  <p class="card-text"><small class="text-muted">{{ s.Datetime }}</small></p>-->
-                <a href="#" class="btn btn-primary">Подробнее</a>
+                <a href="{{ b.get_absolute_url }}" class="btn btn-primary">Подробнее</a>
             </div>
 </div>
         </div>

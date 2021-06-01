@@ -45,7 +45,7 @@ class Orders(models.Model):
     Service = models.ForeignKey(Service, verbose_name="Услуга", null=True, blank=True, on_delete=models.CASCADE, related_name="service")
     Datetime = models.DateTimeField(default=timezone.now, verbose_name="Время оформления заявки")
     Status = models.ForeignKey(Status, default="1", verbose_name="Статус", on_delete=models.CASCADE)
-    DatetimeEnd = models.DateTimeField(verbose_name="Время окончания", null=True, blank=True)
+    DateEnd = models.DateField(verbose_name="Время окончания", null=True, blank=True)
     User = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name="Пользователь", on_delete=models.CASCADE)
     Comment = models.TextField(verbose_name="Комментарий к заказу", null=True, blank=True)
     Phone = models.CharField(max_length=20, verbose_name='Телефон')
