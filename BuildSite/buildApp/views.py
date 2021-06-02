@@ -8,9 +8,9 @@ from django.urls import reverse_lazy
 
 from buildApp.forms import AuthUserForm
 
-from buildApp.models import Service, Category
+from buildApp.models import Service, Category, Feedback
 
-from buildApp.forms import OrderForm
+from buildApp.forms import OrderForm, FeedbackForm
 
 from buildApp.models import Orders
 
@@ -57,9 +57,27 @@ def contacts(request):
     return render(request, 'buildApp/contacts.html')
 
 
-def personal(request):
+def order(request):
     orders = Orders.objects.filter(User=request.user)
-    return render(request, 'buildApp/personal.html', {"orders": orders})
+    return render(request, 'buildApp/order.html', {"orders": orders})
+
+
+def feedback(request):
+    form = FeedbackForm(request.POST or None)
+    return render(request, 'buildApp/feedback.html', {'form': form})
+
+
+def makeFeed(request):
+    if request.method == 'POST':
+        form = FeedbackForm(request.POST or None)
+        if form.is_valid():
+            feedback = Feedback()
+            feedback.TextFeedback = form.cleaned_data['TextFeedback']
+            feedback.File = form.cleaned_data['File']
+            feedback.User = User(request.user.id)
+            feedback.save()
+            return HttpResponseRedirect('/')
+    return HttpResponseRedirect('/feedback')
 
 
 class Logout(LogoutView):

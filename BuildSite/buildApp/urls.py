@@ -11,10 +11,12 @@ urlpatterns = [
     path('service/<slug:service_slug>/', views.showService, name='serviceID'),
     path('service/category/<slug:category_id>/', views.showCategory, name='category'),
     path('contacts', views.contacts, name='contacts'),
+    path('feedback', views.feedback, name='feedback'),
+    path('makeFeed', views.makeFeed, name='makeFeed'),
     path('login', views.BuildLoginView.as_view(), name='login'),
     path('logout', views.Logout.as_view(), name='logout'),
     path('register', views.registerPage, name='register'),
-    path('personal', views.personal, name='personal'),
+    path('order', views.order, name='order'),
     path('makeOrder/<str:id>/', views.makeOrder, name='makeOrder')
 ]
 

@@ -10,10 +10,16 @@
 
     <p class="lead">Описание: {{service.Description}}</p>
         <p class="lead">Характеристики: {{ service.Specification }}</p>
+        {% if request.user.is_authenticated %}
         <form action="{% url 'makeOrder' service.id %}" method="POST">
             {% csrf_token %}
             {{ form|crispy }}
+
             <input type="submit" class="btn btn-success btn-block mb-3" values="Выбрать услугу">
+            {% else %}
+            <p class="lead mt-5">Для того, чтобы оформить заказ вы должны <a href="{% url 'login' %}">войти</a> или
+                <a href="" data-toggle="modal" data-dismiss="modal" data-target="#Register">зарегистрироваться</a></p>
+            {% endif %}
         </form>
     </div>
     </div>

@@ -3,7 +3,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 
-
 # Create your models here.
 from django.utils import timezone
 
@@ -42,7 +41,8 @@ class Service(models.Model):
 
 
 class Orders(models.Model):
-    Service = models.ForeignKey(Service, verbose_name="Услуга", null=True, blank=True, on_delete=models.CASCADE, related_name="service")
+    Service = models.ForeignKey(Service, verbose_name="Услуга", null=True, blank=True, on_delete=models.CASCADE,
+                                related_name="service")
     Datetime = models.DateTimeField(default=timezone.now, verbose_name="Время оформления заявки")
     Status = models.ForeignKey(Status, default="1", verbose_name="Статус", on_delete=models.CASCADE)
     DateEnd = models.DateField(verbose_name="Время окончания", null=True, blank=True)
@@ -55,3 +55,12 @@ class Orders(models.Model):
 
     def get_absolute_url(self):
         return reverse('makeOrder', kwargs={'service_id': self.id})
+
+
+class Feedback(models.Model):
+    TextFeedback = models.TextField(verbose_name="Вопрос/отзыв/предложение")
+    File = models.FileField(upload_to='feedback/', verbose_name="Файл", blank=True)
+    User = models.ForeignKey(User, verbose_name="Пользователь", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.TextFeedback)

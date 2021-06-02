@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Category, Service, Status, Orders
+from .models import Category, Service, Status, Orders, Feedback
 
 
 class ServiceAdmin(admin.ModelAdmin):
@@ -27,4 +27,5 @@ admin.site.register(Category, CategoryAdmin)
 admin.site.register(Service, ServiceAdmin)
 admin.site.register(Status)
 admin.site.register(Orders, OrderAdmin)
+admin.site.register(Feedback)
 # Register your models here.

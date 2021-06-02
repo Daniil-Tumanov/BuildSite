@@ -1,0 +1,12 @@
+{% extends "buildApp/index.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+    <h1 class="display-4">Обратная связь</h1>
+    <form action="{% url 'makeFeed' %}" method="post">
+    {% csrf_token %}
+    {{form|crispy}}
+    <input type="submit" class="btn btn-success mb-5" value="Отправить"/>
+    </form>
+</div>
+{% endblock %}
