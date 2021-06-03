@@ -5,6 +5,7 @@ from django.http import HttpResponseNotFound, Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
+from django.contrib import messages
 
 from buildApp.forms import AuthUserForm
 
@@ -76,6 +77,7 @@ def makeFeed(request):
             feedback.File = form.cleaned_data['File']
             feedback.User = User(request.user.id)
             feedback.save()
+            messages.success(request, 'Спасибо за Ваше обращение. Мы с Вами свяжемся ')
             return HttpResponseRedirect('/')
     return HttpResponseRedirect('/feedback')
 
@@ -99,13 +101,12 @@ def registerPage(request):
         user.username = request.POST.get("Login")
         user.set_password(request.POST.get("Password"))
         user.save()
+        messages.success(request, f"Регистрация успешно завершена. Здравствуйте,"
+                    f" {user.first_name} {user.last_name}! Добро пожаловать")
         user.backend = 'django.contrib.auth.backends.ModelBackend'
         login(request, user)
         next_page = reverse_lazy('index')
-        context = {
-            'form': f"<h1 class='center-block'>Регистрация успешно завершена. <br>Здравствуйте,"
-                    f" <h1 color='red'{user.first_name} {user.last_name}!</h1> Добро пожаловать</h1>:"}
-        return render(request, 'buildApp/index.html', context)
+        return render(request, 'buildApp/index.html')
 
 
 def makeOrder(request, id):
@@ -119,5 +120,6 @@ def makeOrder(request, id):
             order.User = User(request.user.id)
             order.Service = service
             order.save()
+            messages.success(request, 'Ваш заказ успешно оформлен. Ожидайте звонка менеджера')
             return HttpResponseRedirect('/')
         return HttpResponseRedirect('/service/')

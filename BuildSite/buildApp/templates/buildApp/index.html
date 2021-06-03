@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/style.css'%}" type="text/css">
-    <title>Промтехсервис</title>
+    <title>{% block title %}Промтехсервис{% endblock %}</title>
 </head>
 <body>
  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -188,7 +188,11 @@
       {% endif %}
 
       </nav>
+ {% include 'buildApp/messages.html' %}
+ {% block content1 %}
+ {% endblock %}
 {% block content %}
+
 <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
     <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>

@@ -17,15 +17,30 @@ class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {"Slug": ("CategoryName",)}
 
 
+class StatusAdmin(admin.ModelAdmin):
+    list_display = ('id', 'StatusName')
+    list_display_links = ('id', 'StatusName')
+    search_fields = ('StatusName',)
+
+
+class FeedbackAdmin(admin.ModelAdmin):
+    list_display = ('id', 'TextFeedback', 'User')
+    list_display_links = ('id', 'TextFeedback', 'User')
+    search_fields = ('TextFeedback',)
+
+
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('id', 'User', 'Service', 'Datetime', 'DateEnd', 'Status', 'Phone', 'Comment')
     list_display_links = ('id', 'User', 'Service', 'Datetime', 'Status', 'Phone', 'Comment')
     search_fields = ('User',)
 
+admin.site.site_title = "ООО «Промтехсервис»"
+admin.site.site_header = "Администрирование ООО «Промтехсервис»"
+
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Service, ServiceAdmin)
-admin.site.register(Status)
+admin.site.register(Status, StatusAdmin)
 admin.site.register(Orders, OrderAdmin)
-admin.site.register(Feedback)
+admin.site.register(Feedback, FeedbackAdmin)
 # Register your models here.
