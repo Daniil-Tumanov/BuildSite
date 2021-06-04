@@ -3,11 +3,18 @@
 {% block title %}Обратная связь | Промтехсервис{% endblock %}
 {% block content %}
 <div class="container">
-    <h1 class="display-4">Обратная связь</h1>
+
+    <h1 class="text-center display-4 mt-5">Обратная связь</h1>
+{% if request.user.is_authenticated %}
     <form action="{% url 'makeFeed' %}" method="post">
     {% csrf_token %}
     {{form|crispy}}
     <input type="submit" class="btn btn-success mb-5" value="Отправить"/>
     </form>
+    {% else %}
+    <p class="lead"> Для того, чтобы оставить обращение Вам нужно <a href="{% url 'login' %}">войти</a> или
+                <a href="" data-toggle="modal" data-dismiss="modal" data-target="#Register">зарегистрироваться</a>.<br>
+    При возникновении вопросов Вы можете позвонить по номеру: +7 (8652)-92-88-82 или +7 (8652)–633-063</p>
+            {% endif %}
 </div>
 {% endblock %}

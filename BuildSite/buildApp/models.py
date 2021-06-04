@@ -59,7 +59,7 @@ class Orders(models.Model):
 
 class Feedback(models.Model):
     TextFeedback = models.TextField(verbose_name="Вопрос/отзыв/предложение")
-    File = models.FileField(upload_to='feedback/', verbose_name="Файл", blank=True)
+    File = models.FileField(upload_to='feedback//%Y/%m/%d/', verbose_name="Файл", blank=True)
     User = models.ForeignKey(User, verbose_name="Пользователь", on_delete=models.CASCADE)
 
     def __str__(self):
