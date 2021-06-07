@@ -9,8 +9,8 @@
     <img src="{{ service.IMG.url }}" class="align-self-start mr-3">
     <div class="media-body">
 
-    <p class="lead">Описание: {{service.Description}}</p>
-        <p class="lead">Характеристики: {{ service.Specification }}</p>
+    <p class="lead"><span class="font-weight-bold"> Описание:</span> {{service.Description}}</p>
+        <p class="lead"><span class="font-weight-bold">Характеристики:</span> {{ service.Specification }}</p>
         {% if request.user.is_authenticated %}
         <form action="{% url 'makeOrder' service.id %}" method="POST">
             {% csrf_token %}

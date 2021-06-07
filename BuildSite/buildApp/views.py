@@ -49,7 +49,7 @@ def showCategory(request, category_id):
 
 
 def service(request):
-    service = Service.objects.all()
+    service = Service.objects.order_by('NameService')
     category = Category.objects.all()
     return render(request, 'buildApp/service.html', {"service": service, "category": category})
 
